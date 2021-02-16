@@ -1,65 +1,40 @@
+import React, {useState} from 'react'
+
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.scss'
+
+import InputSection from '../components/InputSection'
+import StatusSection from '../components/StatusSection'
 
 export default function Home() {
+  const [status1, setStatus1] = useState('')
+  const [reason1, setReason1] = useState('')
+  const [note1, setNote1] = useState('')
+  const [status2, setStatus2] = useState('')
+  const [reason2, setReason2] = useState('')
+  const [note2, setNote2] = useState('')
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Ferry Tracker App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+      <StatusSection 
+        status={status1}
+        note={note1}
+        reason={reason1}
+        status={status2}
+        note={note2}
+        reason={reason2}
+      />
+      <InputSection 
+        status={status1} setStatus={setStatus1} 
+        reason={reason1} setReason={setReason1} 
+        note={note1} setNote={setNote1}
+        status={status2} setStatus={setStatus2} 
+        reason={reason2} setReason={setReason2} 
+        note={note2} setNote={setNote2}
+      />
     </div>
   )
 }
