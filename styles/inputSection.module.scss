@@ -1,0 +1,53 @@
+@import './variables';
+
+.inputContainer {
+  width: 100vw;
+  height: 18vh;
+  background-color: $mainColor;
+  color:$mainText;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radioBoat {
+  display: flex;
+
+  & > label {
+    padding: 0 1rem;
+  }
+}
+.ferryRadio {
+  display: flex;
+}
+
+.boatBlock {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100vw;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  }
+}
+
+.legionnaireBlock {
+  display: none;
+  justify-content: space-evenly;
+  transition: all 2s  ease-out;
+}
+
+.flandersBlock {
+  display: none;
+  justify-content: space-evenly;
+}
+
+.submitButton {
+  display: flex;
+  flex-direction: row;
+  & Button {
+    margin: 0.5rem;
+  }
+}
