@@ -34,14 +34,23 @@
 }
 
 .legionnaireBlock {
-  display: none;
+  display: flex;
   justify-content: space-evenly;
-  transition: all 2s  ease-out;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    padding: 0 2rem;
+  }
 }
 
 .flandersBlock {
-  display: none;
+  display: flex;
   justify-content: space-evenly;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    padding: 0 2rem;
+  }
 }
 
 .submitButton {

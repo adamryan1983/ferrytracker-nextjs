@@ -14,7 +14,7 @@ function StatusSection(props) {
             <li>{props.status1}</li>
             <li>{props.reason1}</li>
             <li>{props.note1}</li>
-            <li> {props.status1 === "running" ? <div>Run!</div> : <div>Not running!</div>}</li>
+            <li> {props.status1 === "running" ? <div>Run!</div> : <div>Not Running!</div>}</li>
           </ul>
         </Card>
         <Card className={styles.statusCard}>

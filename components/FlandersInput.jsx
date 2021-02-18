@@ -50,11 +50,12 @@ function FlandersInput(props) {
 const returnBack = () => {
   props.setflandersisVisible(false)
   props.setlegionnaireisVisible(false)
+  props.setradioisVisible(true)
 }
 
 
   return (
-    <div className={styles.boatBlock}>
+    <div className={styles.flandersBlock}>
       <div className={styles.dropInput}>
         Flanders Boat Status: 
         <Dropdown value={tempStatus} options={props.statusSelectItems} onChange={handleStatusChange} optionLabel="label" placeholder="Select Boat Status"/>
@@ -79,4 +80,4 @@ const returnBack = () => {
   )
 }
 
-export default FlandersInput
+export default FlandersInput;

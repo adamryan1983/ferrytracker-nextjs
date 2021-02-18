@@ -1,21 +1,20 @@
-import React, {useState, createRef, useRef} from 'react'
+import React, {useState, createRef, useRef, useEffect} from 'react'
 import styles from '../styles/Home.module.scss'
 
 //prime react imports
-import { Dropdown } from 'primereact/dropdown';
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
-import { InputTextarea } from 'primereact/inputtextarea';
 import 'primereact/resources/themes/mdc-light-deeppurple/theme.css';
 import 'primereact/resources/primereact.css';
 import PrimeReact from 'primereact/api';
 import { Toast } from 'primereact/toast';
+import LegionnaireInput from './LegionnaireInput';
+import FlandersInput from './FlandersInput';
+import { RadioButton } from 'primereact/radiobutton';
 
 PrimeReact.ripple = true;
 
 const statusSelectItems = [
-  {label: 'Running', value: 'rn'},
-  {label: 'Delayed', value: 'dly'},
+  {label: 'Running', value: 'running'},
+  {label: 'Delayed', value: 'delayed'},
   {label: 'Tied Up Weather', value: 'tuw'},
   {label: 'Tied Up Mechanical', value: 'tum'}
 ];
@@ -23,65 +22,57 @@ const statusSelectItems = [
 
 function InputSection(props) {
 
-  const [tempStatus, setTempStatus] = useState()
   const toast = useRef(null);
-  let reason, note;
+  const [boatSelect, setboatSelect] = useState();
+  const [legionnaireisVisible, setlegionnaireisVisible] = useState(false)
+  const [flandersisVisible, setflandersisVisible] = useState(false)
+  const [radioisVisible,setradioisVisible] = useState(true)
 
-  const showSuccess = () => {
-    toast.current.show({severity:'success', summary: 'Success', detail:'Status Updated', life: 3000});
-    props.setReason(reason);
-    props.setStatus(tempStatus);
-    props.setNote(note);
-    document.querySelector("#notesTextBox").value = ""
-    document.querySelector("#reasonTextBox").value = ""
-}
-  const showFail = () => {
-    toast.current.show({severity:'error', summary: 'Fail', detail:'Status Failed to Update', life: 3000});
-}
+  const handleBoatClick = (event) => {
+    setboatSelect(event.target.value)
+    setradioisVisible(false)
+    boatSelect === "Legionnaire" ? setlegionnaireisVisible(true) : setflandersisVisible(true)
 
-  const handleStatusChange = (event) => {
-    setTempStatus(event.target.value)
-    status = event.target.value;
-    // props.setStatus(event.target.value);
-  };
-  const handleReasonChange = (event) => {
-    reason = event.target.value
-    // props.setReason(event.target.value);
-  };
-  const handleNoteChange = (event) => {
-    note = event.target.value
-    // props.setNote(event.target.value);
-  };
-
-  const handleSubmit = () => {
-
-    tempStatus ? showSuccess() : showFail();
-    setTempStatus(null)
   }
   
   return (
     <div className={styles.inputContainer}>
       <Toast ref={toast} />
-      <div className={styles.dropInput}>
-        Boat Status: 
-        <Dropdown value={tempStatus} options={statusSelectItems} onChange={handleStatusChange} optionLabel="label" placeholder="Select Boat Status"/>
-      </div>
-      <div className={styles.reasonInput}>
-          <label htmlFor="reasonTextBox">Reason: </label>
-          <InputText id="reasonTextBox" onChange={handleReasonChange} required/>
-
-      </div>
-      <div className={styles.notesInput}>
-          <label htmlFor="notesTextBox">Notes: </label>
-          <InputTextarea id="notesTextBox" rows={5} cols={30} onChange={handleNoteChange} required/>
-
-      </div>
-      <div className={styles.submitButton}>
-
-          <Button onClick={ handleSubmit }>
-            Submit
-          </Button>      
-
+      {radioisVisible && 
+      <div className={styles.radioBoat}>
+        Select a boat:
+        <div className={styles.ferryRadio}>
+            <RadioButton inputId="boat1" name="boat" value="Legionnaire" onChange={handleBoatClick} checked={boatSelect === "Legionnaire"} />
+            <label htmlFor="boat1">Legionnaire</label>
+        </div>
+        <div className={styles.ferryRadio}>
+            <RadioButton inputId="boat2" name="boat" value="Flanders" onChange={handleBoatClick} checked={boatSelect === "Flanders"} />
+            <label htmlFor="boat2">Flanders</label>
+        </div>
+      </div>}
+      <div className={styles.boatBlock}>
+      {legionnaireisVisible && 
+      <LegionnaireInput 
+        toast={toast}
+        statusSelectItems={statusSelectItems}
+        setStatus1={props.setStatus1}
+        setReason1={props.setReason1}
+        setNote1={props.setNote1}
+        setlegionnaireisVisible={setlegionnaireisVisible}
+        setflandersisVisible={setflandersisVisible}
+        setradioisVisible={setradioisVisible}
+      /> }
+      {flandersisVisible &&
+      <FlandersInput 
+        toast={toast}
+        statusSelectItems={statusSelectItems}
+        setStatus2={props.setStatus2}
+        setReason2={props.setReason2}
+        setNote2={props.setNote2}
+        setlegionnaireisVisible={setlegionnaireisVisible}
+        setflandersisVisible={setflandersisVisible}
+        setradioisVisible={setradioisVisible}
+      /> }
       </div>
     </div>
   )

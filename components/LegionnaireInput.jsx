@@ -36,6 +36,7 @@ function LegionnaireInput(props) {
   const returnBack = () => {
     props.setflandersisVisible(false)
     props.setlegionnaireisVisible(false)
+    props.setradioisVisible(true)
   }
 
   const showSuccess = () => {
@@ -51,7 +52,7 @@ function LegionnaireInput(props) {
 }
 
   return (
-    <div className={styles.boatBlock}>
+    <div className={styles.legionnaireBlock}>
       <div className={styles.dropInput}>
         Legionnaire Boat Status: 
         <Dropdown value={tempStatus} options={props.statusSelectItems} onChange={handleStatusChange} optionLabel="label" placeholder="Select Boat Status"/>
@@ -76,4 +77,4 @@ function LegionnaireInput(props) {
   )
 }
 
-export default LegionnaireInput
+export default LegionnaireInput;
