@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from '../styles/Home.module.scss'
-
+import { useHarperDB } from 'use-harperdb';
 import { Card } from 'primereact/card';
 
 function StatusSection(props) {
