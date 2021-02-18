@@ -25,7 +25,7 @@ function InputSection(props) {
 
   const [tempStatus, setTempStatus] = useState()
   const toast = useRef(null);
-  let status, reason, note;
+  let reason, note;
 
   const showSuccess = () => {
     toast.current.show({severity:'success', summary: 'Success', detail:'Status Updated', life: 3000});
