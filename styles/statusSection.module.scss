@@ -35,6 +35,16 @@
   }
 }
 
+.dbStatusReturn {
+  list-style: none;
+  & li {
+    list-style: none;
+    display: flex;
+    padding: 0 1rem;
+    margin: 0 1rem;
+  }
+}
+
 .statusCard:hover {
   box-shadow: 0 6px 12px 0 $mainText;
   transform: scale(1.09);

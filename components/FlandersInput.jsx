@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import styles from '../styles/inputSection.module.scss'
 
+import db from './Database'
+
 //prime react imports
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
@@ -8,11 +10,9 @@ import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import 'primereact/resources/themes/mdc-light-deeppurple/theme.css';
 import 'primereact/resources/primereact.css';
-import PrimeReact from 'primereact/api';
 
 
 function FlandersInput(props) {
-
 
   let note, reason;
   const [tempStatus, setTempStatus] = useState()
@@ -35,11 +35,20 @@ function FlandersInput(props) {
     // props.setNote(event.target.value);
   };
 
+
+
   const showSuccess = () => {
     props.toast.current.show({severity:'success', summary: 'Success', detail:'Status Updated', life: 3000});
     props.setReason2(reason);
     props.setStatus2(tempStatus);
     props.setNote2(note);
+    db
+    .collection('flanders')
+    .add({
+      status: tempStatus,
+      reason: reason,
+      note: note,
+    });
     document.querySelector("#notesTextBox2").value = ""
     document.querySelector("#reasonTextBox2").value = ""
 }
@@ -50,11 +59,12 @@ function FlandersInput(props) {
 const returnBack = () => {
   props.setflandersisVisible(false)
   props.setlegionnaireisVisible(false)
+  props.setradioisVisible(true)
 }
 
 
   return (
-    <div className={styles.boatBlock}>
+    <div className={styles.flandersBlock}>
       <div className={styles.dropInput}>
         Flanders Boat Status: 
         <Dropdown value={tempStatus} options={props.statusSelectItems} onChange={handleStatusChange} optionLabel="label" placeholder="Select Boat Status"/>
@@ -79,4 +89,4 @@ const returnBack = () => {
   )
 }
 
-export default FlandersInput
+export default FlandersInput;
