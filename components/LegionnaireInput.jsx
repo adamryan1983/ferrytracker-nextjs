@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import styles from '../styles/inputSection.module.scss'
 
+import db from './Database'
+
 //prime react imports
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
@@ -8,7 +10,6 @@ import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import 'primereact/resources/themes/mdc-light-deeppurple/theme.css';
 import 'primereact/resources/primereact.css';
-import PrimeReact from 'primereact/api';
 
 function LegionnaireInput(props) {
 
@@ -44,6 +45,13 @@ function LegionnaireInput(props) {
     props.setReason1(reason);
     props.setStatus1(tempStatus);
     props.setNote1(note);
+    db
+    .collection('legionnaire')
+    .add({
+      status: tempStatus,
+      reason: reason,
+      note: note,
+    });
     document.querySelector("#notesTextBox1").value = ""
     document.querySelector("#reasonTextBox1").value = ""
 }

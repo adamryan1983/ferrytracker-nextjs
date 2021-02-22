@@ -28,11 +28,17 @@ function InputSection(props) {
   const [flandersisVisible, setflandersisVisible] = useState(false)
   const [radioisVisible,setradioisVisible] = useState(true)
 
-  const handleBoatClick = (event) => {
-    setboatSelect(event.target.value)
+  const handleBoatClick1 = () => {
+    setboatSelect('Legionnaire')
     setradioisVisible(false)
-    boatSelect === "Legionnaire" ? setlegionnaireisVisible(true) : setflandersisVisible(true)
-
+    setflandersisVisible(false)
+    setlegionnaireisVisible(true)
+  }
+  const handleBoatClick2 = (event) => {
+    setboatSelect('Flanders')
+    setradioisVisible(false)
+    setlegionnaireisVisible(false)
+    setflandersisVisible(true)
   }
   
   return (
@@ -42,11 +48,11 @@ function InputSection(props) {
       <div className={styles.radioBoat}>
         Select a boat:
         <div className={styles.ferryRadio}>
-            <RadioButton inputId="boat1" name="boat" value="Legionnaire" onChange={handleBoatClick} checked={boatSelect === "Legionnaire"} />
+            <RadioButton inputId="boat1" name="boat" value="Legionnaire" onChange={handleBoatClick1} checked={boatSelect === "Legionnaire"} />
             <label htmlFor="boat1">Legionnaire</label>
         </div>
         <div className={styles.ferryRadio}>
-            <RadioButton inputId="boat2" name="boat" value="Flanders" onChange={handleBoatClick} checked={boatSelect === "Flanders"} />
+            <RadioButton inputId="boat2" name="boat" value="Flanders" onChange={handleBoatClick2} checked={boatSelect === "Flanders"} />
             <label htmlFor="boat2">Flanders</label>
         </div>
       </div>}
