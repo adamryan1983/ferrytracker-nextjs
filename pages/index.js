@@ -20,20 +20,20 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StatusSection 
-        status={status1}
-        note={note1}
-        reason={reason1}
-        status={status2}
-        note={note2}
-        reason={reason2}
+        status1={status1}
+        note1={note1}
+        reason1={reason1}
+        status2={status2}
+        note2={note2}
+        reason2={reason2}
       />
       <InputSection 
-        status={status1} setStatus={setStatus1} 
-        reason={reason1} setReason={setReason1} 
-        note={note1} setNote={setNote1}
-        status={status2} setStatus={setStatus2} 
-        reason={reason2} setReason={setReason2} 
-        note={note2} setNote={setNote2}
+        status1={status1} setStatus1={setStatus1} 
+        reason1={reason1} setReason1={setReason1} 
+        note1={note1} setNote1={setNote1}
+        status2={status2} setStatus2={setStatus2} 
+        reason2={reason2} setReason2={setReason2} 
+        note2={note2} setNote2={setNote2}
       />
     </div>
   )

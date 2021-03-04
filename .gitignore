@@ -29,8 +29,15 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+.env
 
 # vercel
 .vercel
 
+<<<<<<< HEAD
 _static
+=======
+/components/Database.js
+
+_static
+>>>>>>> d682aadc0de0875457a53a6bef1a1a87c3859e09
