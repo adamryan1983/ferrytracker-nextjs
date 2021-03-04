@@ -33,6 +33,4 @@ yarn-error.log*
 # vercel
 .vercel
 
-/components/Database.js
-
-/ferry-backend/
+_static
