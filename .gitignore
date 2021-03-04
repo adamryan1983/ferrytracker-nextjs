@@ -36,4 +36,4 @@ yarn-error.log*
 
 /components/Database.js
 
-/ferry-backend/
+_static
