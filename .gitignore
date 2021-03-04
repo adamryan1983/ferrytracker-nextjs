@@ -36,3 +36,6 @@ yarn-error.log*
 
 #db file
 /components/Database.js
+
+# static folder for DigitalOcean App Platform
+_static

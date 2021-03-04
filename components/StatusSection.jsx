@@ -10,6 +10,7 @@ function StatusSection(props) {
   const [statusLegionnaire, setStatusLegionnaire] = useState([]);
   const [isRunning, setisRunning] = useState("running");
   const [isRunning2, setisRunning2] = useState("running");
+
   const legionnaireCollection = db
     .collection("legionnaire")
     .orderBy("datetime", "desc");

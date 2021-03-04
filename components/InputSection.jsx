@@ -1,5 +1,6 @@
 import React, { useState, createRef, useRef, useEffect } from "react";
-import styles from "../styles/Home.module.scss";
+// import styles from "../styles/Home.module.scss";
+import styles from "../styles/inputSection.module.scss";
 
 //prime react imports
 import "primereact/resources/themes/mdc-light-deeppurple/theme.css";
