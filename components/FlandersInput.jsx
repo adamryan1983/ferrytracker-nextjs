@@ -67,7 +67,7 @@ function FlandersInput(props) {
   return (
     <div className={styles.flandersBlock}>
       <div className={styles.dropInput}>
-        Flanders Boat Status:
+        <h4>Flanders Boat Status:</h4>
         <Dropdown
           value={tempStatus}
           options={props.statusSelectItems}
