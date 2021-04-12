@@ -38,6 +38,7 @@ function InputSection(props) {
   const handleClick = () => {
     props.setIsVisibleMenu(true);
     props.setIsVisibleBoat(false);
+    props.toggle(!props.on);
   };
 
   return (
