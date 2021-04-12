@@ -3,13 +3,17 @@ import styles from "../styles/statusSection.module.scss";
 
 import { Card } from "primereact/card";
 import db from "./Database";
-import Div100vh from "react-div-100vh";
 
-function StatusSection(props) {
+import { useChain, animated } from "react-spring";
+
+const StatusSection = (props) => {
   const [statusFlanders, setStatusFlanders] = useState([]);
   const [statusLegionnaire, setStatusLegionnaire] = useState([]);
+  const [statusLineup, setStatusLineup] = useState([]);
   const [isRunning, setisRunning] = useState("running");
   const [isRunning2, setisRunning2] = useState("running");
+  const [boatDisplay, setBoatDisplay] = useState(true);
+  const [lineupDisplay, setLineupDisplay] = useState(false);
 
   const legionnaireCollection = db
     .collection("legionnaire")
@@ -17,25 +21,44 @@ function StatusSection(props) {
   const flandersCollection = db
     .collection("flanders")
     .orderBy("datetime", "desc");
+  const lineupCollection = db.collection("lineup").orderBy("datetime", "desc");
 
   useEffect(() => {
     legionnaireCollection.onSnapshot((snap) => {
-      const info = snap.docs.map((doc) => ({
+      const info: any = snap.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
       setStatusLegionnaire(info);
       setisRunning(info[0].status);
+      return () => {
+        console.log("unmounted");
+      };
     });
   }, []);
   useEffect(() => {
     flandersCollection.onSnapshot((snap) => {
-      const info = snap.docs.map((doc) => ({
+      const info: any = snap.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
       setStatusFlanders(info);
       setisRunning2(info[0].status);
+      return () => {
+        console.log("unmounted");
+      };
+    });
+  }, []);
+  useEffect(() => {
+    lineupCollection.onSnapshot((snap) => {
+      const info: any = snap.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setStatusLineup(info);
+      return () => {
+        console.log("unmounted");
+      };
     });
   }, []);
 
@@ -47,36 +70,49 @@ function StatusSection(props) {
       m = d1.getMonth() + 1,
       y = d1.getFullYear();
 
-    mins < 10 ? (mins = "0" + mins) : (mins = mins);
+    let minsText = mins.toString();
+    mins < 10 ? (minsText = "0" + mins) : null;
 
-    let dateString = `${y}/${m}/${d}, ${hrs}:${mins}`;
+    let dateString = `${y}/${m}/${d}, ${hrs}:${minsText}`;
     return dateString;
   };
 
+  const handleBoatClick = () => {
+    setBoatDisplay(false);
+    setLineupDisplay(true);
+  };
+  const handleLineupClick = () => {
+    setBoatDisplay(true);
+    setLineupDisplay(false);
+  };
+
   return (
-    <Div100vh>
-      <div className={styles.statusContainer}>
-        <img
-          className={styles.logo}
-          src="/ferrylogo-horizontal-trans.png"
-        ></img>
+    <div className={styles.statusContainer}>
+      <img className={styles.logo} src="/ferrylogo-horizontal-trans.png"></img>
+      {boatDisplay && (
         <div className={styles.boatCards}>
           <div className={styles.boatStatusCard}>
             <div className={styles.headerLight}>
               <h2>Legionnaire</h2>
+              <h3 className={styles.lineupButton} onClick={handleBoatClick}>
+                Click to see Lineup info
+              </h3>
               <div>
                 <h3>Status:</h3>
                 {isRunning === "Running" ? (
-                  <img src="/running.png" />
+                  <img src="/running.png" className={styles.runningIcon} />
                 ) : isRunning === "delayed" ? (
-                  <img src="/delayed.png" />
+                  <img src="/delayed.png" className={styles.runningIcon} />
                 ) : (
-                  <img src="/tiedup.png" />
+                  <img src="/tiedup.png" className={styles.runningIcon} />
                 )}
               </div>
             </div>
             <Card className={styles.statusCard}>
-              <div className={styles.flexContainerMobile}>
+              <div
+                className={styles.flexContainerMobile}
+                onClick={handleBoatClick}
+              >
                 <ul className={styles.statusHeader}>
                   <li className={styles.statusSubHeader}>
                     <div>Time</div>
@@ -104,19 +140,25 @@ function StatusSection(props) {
           <div className={styles.boatStatusCard}>
             <div className={styles.headerLight}>
               <h2>Flanders</h2>
+              <h3 className={styles.lineupButton} onClick={handleBoatClick}>
+                Click to see Lineup info
+              </h3>
               <div>
                 <h3>Status:</h3>
                 {isRunning2 === "Running" ? (
-                  <img src="/running.png" />
+                  <img src="/running.png" className={styles.runningIcon} />
                 ) : isRunning2 === "delayed" ? (
-                  <img src="/delayed.png" />
+                  <img src="/delayed.png" className={styles.runningIcon} />
                 ) : (
-                  <img src="/tiedup.png" />
+                  <img src="/tiedup.png" className={styles.runningIcon} />
                 )}
               </div>
             </div>
             <Card className={styles.statusCard}>
-              <div className={styles.flexContainerMobile}>
+              <div
+                className={styles.flexContainerMobile}
+                onClick={handleBoatClick}
+              >
                 <ul className={styles.statusHeader}>
                   <li className={styles.statusSubHeader}>
                     <div>Time</div>
@@ -137,9 +179,42 @@ function StatusSection(props) {
             </Card>
           </div>
         </div>
-      </div>
-    </Div100vh>
+      )}
+      {lineupDisplay && (
+        <div className={styles.boatStatusCard}>
+          <div className={styles.headerLight}>
+            <h2>Lineup Info</h2>
+            <h3 className={styles.lineupButton} onClick={handleLineupClick}>
+              Click to see Boat info
+            </h3>
+          </div>
+          <Card className={styles.statusCard}>
+            <div
+              className={styles.flexContainerMobile}
+              onClick={handleLineupClick}
+            >
+              <ul className={styles.statusHeader}>
+                <li className={styles.statusSubHeader}>
+                  <div>Time</div>
+                  <div>Vehicles</div>
+                  <div>Location</div>
+                  <div>Side</div>
+                </li>
+                {statusLineup.map((lineupinfo) => (
+                  <li key={lineupinfo.id} className={styles.dbStatusReturn}>
+                    <div>{dateConvert(lineupinfo.datetime.toMillis())}</div>
+                    <div>{lineupinfo.cars}</div>
+                    <div>{lineupinfo.geolocation}</div>
+                    <div>{lineupinfo.side}</div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Card>
+        </div>
+      )}
+    </div>
   );
-}
+};
 
 export default StatusSection;

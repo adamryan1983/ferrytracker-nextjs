@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 import Head from "next/head";
-import styles from "../styles/Home.module.scss";
+import styles from "@styles/Home.module.scss";
 import Div100vh from "react-div-100vh";
 
-import InputSection from "../components/InputSection";
-import StatusSection from "../components/StatusSection";
+import StatusSection from "@components/StatusSection";
+import SelectionScreen from "@components/SelectionScreen";
 
 export default function Home() {
   const [status1, setStatus1] = useState("");
@@ -29,7 +29,7 @@ export default function Home() {
           note2={note2}
           reason2={reason2}
         />
-        <InputSection
+        <SelectionScreen
           status1={status1}
           setStatus1={setStatus1}
           reason1={reason1}

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styles from "../styles/inputSection.module.scss";
+import React, { useState, useRef } from "react";
+import styles from "@styles/inputSection.module.scss";
 
 import db from "./Database";
 
@@ -12,6 +12,7 @@ import "primereact/resources/themes/mdc-light-deeppurple/theme.css";
 import "primereact/resources/primereact.css";
 
 function LegionnaireInput(props) {
+  const formRef = useRef(null);
   let note, reason;
   const [tempStatus, setTempStatus] = useState();
 
@@ -22,15 +23,12 @@ function LegionnaireInput(props) {
 
   const handleStatusChange = (event) => {
     setTempStatus(event.target.value);
-    // props.setStatus(event.target.value);
   };
   const handleReasonChange = (event) => {
     reason = event.target.value;
-    // props.setReason(event.target.value);
   };
   const handleNoteChange = (event) => {
     note = event.target.value;
-    // props.setNote(event.target.value);
   };
 
   const returnBack = () => {
@@ -55,8 +53,7 @@ function LegionnaireInput(props) {
       reason: reason,
       note: note,
     });
-    document.querySelector("#notesTextBox1").value = "";
-    document.querySelector("#reasonTextBox1").value = "";
+    formRef.current.reset();
   };
   const showFail = () => {
     props.toast.current.show({
@@ -68,38 +65,40 @@ function LegionnaireInput(props) {
   };
 
   return (
-    <div className={styles.legionnaireBlock}>
-      <div className={styles.dropInput}>
-        <h4>Legionnaire Boat Status:</h4>
-        <Dropdown
-          value={tempStatus}
-          options={props.statusSelectItems}
-          onChange={handleStatusChange}
-          optionLabel="label"
-          placeholder="Select Boat Status"
-        />
+    <form ref={formRef}>
+      <div className={styles.legionnaireBlock}>
+        <div className={styles.dropInput}>
+          <h4>Legionnaire Boat Status:</h4>
+          <Dropdown
+            value={tempStatus}
+            options={props.statusSelectItems}
+            onChange={handleStatusChange}
+            optionLabel="label"
+            placeholder="Select Boat Status"
+          />
+        </div>
+        <div className={styles.reasonInput}>
+          <label htmlFor="reasonTextBox1">Reason: </label>
+          <InputText id="reasonTextBox1" onChange={handleReasonChange} required />
+        </div>
+        <div className={styles.notesInput}>
+          <label htmlFor="notesTextBox1">Notes: </label>
+          <InputTextarea
+            id="notesTextBox1"
+            rows={2}
+            cols={30}
+            onChange={handleNoteChange}
+            required
+          />
+        </div>
+        <div className={styles.submitButton}>
+          <Button onClick={handleSubmit}>Submit</Button>
+          <Button onClick={returnBack} style={{ backgroundColor: "red" }}>
+            Back
+          </Button>
+        </div>
       </div>
-      <div className={styles.reasonInput}>
-        <label htmlFor="reasonTextBox1">Reason: </label>
-        <InputText id="reasonTextBox1" onChange={handleReasonChange} required />
-      </div>
-      <div className={styles.notesInput}>
-        <label htmlFor="notesTextBox1">Notes: </label>
-        <InputTextarea
-          id="notesTextBox1"
-          rows={2}
-          cols={30}
-          onChange={handleNoteChange}
-          required
-        />
-      </div>
-      <div className={styles.submitButton}>
-        <Button onClick={handleSubmit}>Submit</Button>
-        <Button onClick={returnBack} style={{ backgroundColor: "red" }}>
-          Back
-        </Button>
-      </div>
-    </div>
+    </form>
   );
 }
 
