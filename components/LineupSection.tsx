@@ -72,6 +72,7 @@ function LineupSection(props: any) {
     setChoice(null);
     props.setIsVisibleMenu(true);
     props.setIsVisibleLineup(false);
+    props.toggle(!props.on);
   };
 
   return (

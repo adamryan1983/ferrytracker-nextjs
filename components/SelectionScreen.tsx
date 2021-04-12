@@ -3,7 +3,8 @@ import styles from "@styles/selectionScreen.module.scss";
 import InputSection from "@components/InputSection";
 import LineupSection from "@components/LineupSection";
 
-import { Card } from "primereact/card";
+import { useSpring, animated as a } from "react-spring";
+
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 
@@ -14,11 +15,22 @@ const SelectionScreen = (props) => {
 
   const toast = useRef(null);
 
+  //spring animations
+  const [on, toggle] = useState(false);
+  const animation = useSpring({
+    opacity: on ? 0 : 1,
+  });
+  const animation2 = useSpring({
+    opacity: on ? 1 : 0,
+  });
+
   const handleClickLineup = () => {
+    toggle(!on);
     setIsVisibleMenu(false);
     setIsVisibleLineup(true);
   };
   const handleClickBoat = () => {
+    toggle(!on);
     setIsVisibleMenu(false);
     setIsVisibleBoat(true);
   };
@@ -26,7 +38,7 @@ const SelectionScreen = (props) => {
     <>
       <Toast ref={toast} />
       {isVisibleMenu && (
-        <div className={styles.buttonContainer}>
+        <a.div className={styles.buttonContainer} style={animation}>
           <h2>Please choose an option:</h2>
           <Button className={styles.buttonChoice} onClick={handleClickLineup}>
             Update Current Lineup/Traffic
@@ -34,34 +46,42 @@ const SelectionScreen = (props) => {
           <Button className={styles.buttonChoice} onClick={handleClickBoat}>
             Update Boat Status
           </Button>
-        </div>
+        </a.div>
       )}
 
       {isVisibleBoat && (
-        <InputSection
-          status1={props.status1}
-          setStatus1={props.setStatus1}
-          reason1={props.reason1}
-          setReason1={props.setReason1}
-          note1={props.note1}
-          setNote1={props.setNote1}
-          status2={props.status2}
-          setStatus2={props.setStatus2}
-          reason2={props.reason2}
-          setReason2={props.setReason2}
-          note2={props.note2}
-          setNote2={props.setNote2}
-          toast={toast}
-          setIsVisibleMenu={setIsVisibleMenu}
-          setIsVisibleBoat={setIsVisibleBoat}
-        />
+        <a.div style={animation2}>
+          <InputSection
+            status1={props.status1}
+            setStatus1={props.setStatus1}
+            reason1={props.reason1}
+            setReason1={props.setReason1}
+            note1={props.note1}
+            setNote1={props.setNote1}
+            status2={props.status2}
+            setStatus2={props.setStatus2}
+            reason2={props.reason2}
+            setReason2={props.setReason2}
+            note2={props.note2}
+            setNote2={props.setNote2}
+            toast={toast}
+            setIsVisibleMenu={setIsVisibleMenu}
+            setIsVisibleBoat={setIsVisibleBoat}
+            toggle={toggle}
+            on={on}
+          />
+        </a.div>
       )}
       {isVisibleLineup && (
-        <LineupSection
-          setIsVisibleLineup={setIsVisibleLineup}
-          setIsVisibleMenu={setIsVisibleMenu}
-          toast={toast}
-        />
+        <a.div style={animation2}>
+          <LineupSection
+            setIsVisibleLineup={setIsVisibleLineup}
+            setIsVisibleMenu={setIsVisibleMenu}
+            toast={toast}
+            toggle={toggle}
+            on={on}
+          />
+        </a.div>
       )}
     </>
   );

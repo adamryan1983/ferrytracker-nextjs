@@ -4,7 +4,7 @@ import styles from "../styles/statusSection.module.scss";
 import { Card } from "primereact/card";
 import db from "./Database";
 
-import { useChain, animated } from "react-spring";
+import { useSpring, animated as a } from "react-spring";
 
 const StatusSection = (props) => {
   const [statusFlanders, setStatusFlanders] = useState([]);
@@ -14,6 +14,14 @@ const StatusSection = (props) => {
   const [isRunning2, setisRunning2] = useState("running");
   const [boatDisplay, setBoatDisplay] = useState(true);
   const [lineupDisplay, setLineupDisplay] = useState(false);
+
+  //spring animations
+  const [on, toggle] = useState(false);
+  const { transform, opacity } = useSpring({
+    opacity: on ? 1 : 0,
+    transform: `perspective(600px) rotateX(${on ? 180 : 0}deg)`,
+    config: { mass: 5, tension: 500, friction: 80 },
+  });
 
   const legionnaireCollection = db
     .collection("legionnaire")
@@ -80,17 +88,22 @@ const StatusSection = (props) => {
   const handleBoatClick = () => {
     setBoatDisplay(false);
     setLineupDisplay(true);
+    toggle(!on);
   };
   const handleLineupClick = () => {
     setBoatDisplay(true);
     setLineupDisplay(false);
+    toggle(!on);
   };
 
   return (
     <div className={styles.statusContainer}>
       <img className={styles.logo} src="/ferrylogo-horizontal-trans.png"></img>
       {boatDisplay && (
-        <div className={styles.boatCards}>
+        <a.div
+          className={styles.boatCards}
+          style={{ opacity: opacity.interpolate((o) => 1 - o), transform }}
+        >
           <div className={styles.boatStatusCard}>
             <div className={styles.headerLight}>
               <h2>Legionnaire</h2>
@@ -178,10 +191,17 @@ const StatusSection = (props) => {
               </div>
             </Card>
           </div>
-        </div>
+        </a.div>
       )}
+
       {lineupDisplay && (
-        <div className={styles.boatStatusCard}>
+        <a.div
+          className={styles.boatStatusCard}
+          style={{
+            opacity,
+            transform: transform.interpolate((t) => `${t} rotateX(180deg)`),
+          }}
+        >
           <div className={styles.headerLight}>
             <h2>Lineup Info</h2>
             <h3 className={styles.lineupButton} onClick={handleLineupClick}>
@@ -211,7 +231,7 @@ const StatusSection = (props) => {
               </ul>
             </div>
           </Card>
-        </div>
+        </a.div>
       )}
     </div>
   );
