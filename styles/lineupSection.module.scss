@@ -1,0 +1,152 @@
+@import "./variables";
+
+.lineupContainer {
+  display: flex;
+  width: 100vw;
+  height: 18vh;
+  background-color: $mainColor;
+  color: $mainText;
+}
+
+.formContainer {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  .labelText {
+    display: flex;
+    flex-direction: column;
+  }
+  .labelRadio {
+    display: flex;
+    flex-direction: row;
+  }
+}
+.radioButton,
+.inputText {
+  margin-left: 1rem;
+}
+
+.inputContainer {
+  display: flex;
+  height: 100%;
+  width: 70vw;
+  justify-content: center;
+  align-items: center;
+  label {
+    padding: 0.4rem 0 0 0;
+  }
+}
+
+.locationSelector {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  padding-right: 1rem;
+  width: 25%;
+  height: 100%;
+  div:first-child {
+    font-weight: 600;
+  }
+}
+
+.textContainer {
+  display: flex;
+  height: 100%;
+  width: 75%;
+  justify-content: center;
+  align-items: center;
+  label {
+    padding: 0 calc(1rem + 0.5vw + 0.5vh);
+    display: flex;
+  }
+}
+.buttonContainer {
+  display: flex;
+  width: 30vw;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 calc(1rem + 0.6vw + 0.6vh);
+  button {
+    margin: 0 0.5rem;
+    padding: calc(0.5rem + 0.6vw + 0.6vh) calc(0.3rem + 0.6vw + 0.6vh);
+  }
+  button:first-child {
+    background-color: $primaryColor;
+  }
+  button:nth-child(2) {
+    background-color: $fourthColor;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .lineupContainer {
+    max-width: 100vw;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    font-size: calc(0.3rem + 0.4vh + 0.4vw);
+  }
+  .inputContainer {
+    height: 100%;
+    display: flex;
+    width: 70%;
+    justify-content: center;
+    align-items: center;
+    .radioButton,
+    .inputText {
+      margin: 0;
+    }
+    .inputText {
+      padding: 0 0.3;
+      width: 100%;
+    }
+  }
+  .buttonContainer {
+    display: flex;
+    height: 100%;
+    width: 30%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0.5rem;
+    padding: 0 calc(0.3rem + 0.3vw + 0.3vh);
+    button {
+      padding: calc(0.5rem + 0.6vw + 0.6vh) calc(0.3rem + 0.6vw + 0.6vh);
+      font-size: calc(0.4rem + 0.3vw + 0.3vh);
+    }
+    button:first-child {
+      background-color: $primaryColor;
+    }
+    button:nth-child(2) {
+      background-color: $fourthColor;
+    }
+  }
+  .locationSelector {
+    width: 40%;
+  }
+  .textContainer {
+    width: 60%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .lineupContainer {
+    display: flex;
+    text-align: right;
+  }
+  .buttonContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .submitButton {
+    display: flex;
+    flex-direction: row;
+    & Button {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+}
