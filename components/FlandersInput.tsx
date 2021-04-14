@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import styles from "@styles/inputSection.module.scss";
 
-import db from "./Database";
+import db from "@lib/Database";
 
 //prime react imports
 import { Dropdown } from "primereact/dropdown";

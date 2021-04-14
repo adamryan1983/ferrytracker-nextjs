@@ -14,14 +14,41 @@ export default function Home() {
   const [status2, setStatus2] = useState("");
   const [reason2, setReason2] = useState("");
   const [note2, setNote2] = useState("");
+  const [logged, setLogged] = useState(false);
+  const [isVisibleMenu, setIsVisibleMenu] = useState(false);
   return (
     <Div100vh>
       <div className={styles.container}>
         <Head>
           <title>Ferry Tracker App</title>
-          <link rel="icon" href="/favicon.ico" />
+          <meta
+            name="google-site-verification"
+            content="KEPNvjZ_6TgvJY9KU6JfQ49fsjTsc5x2IT5BBBeydY4"
+          />
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+          />
+          <link rel="manifest" href="/site.webmanifest" />
         </Head>
         <StatusSection
+          isVisibleMenu={isVisibleMenu}
+          setIsVisibleMenu={setIsVisibleMenu}
+          logged={logged}
+          setLogged={setLogged}
           status1={status1}
           note1={note1}
           reason1={reason1}
@@ -30,6 +57,10 @@ export default function Home() {
           reason2={reason2}
         />
         <SelectionScreen
+          isVisibleMenu={isVisibleMenu}
+          setIsVisibleMenu={setIsVisibleMenu}
+          logged={logged}
+          setLogged={setLogged}
           status1={status1}
           setStatus1={setStatus1}
           reason1={reason1}

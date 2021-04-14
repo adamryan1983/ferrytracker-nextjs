@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import styles from "@styles/inputSection.module.scss";
 
-import db from "./Database";
+import db from "@lib/Database";
 
 //prime react imports
 import { Dropdown } from "primereact/dropdown";
@@ -79,7 +79,11 @@ function LegionnaireInput(props) {
         </div>
         <div className={styles.reasonInput}>
           <label htmlFor="reasonTextBox1">Reason: </label>
-          <InputText id="reasonTextBox1" onChange={handleReasonChange} required />
+          <InputText
+            id="reasonTextBox1"
+            onChange={handleReasonChange}
+            required
+          />
         </div>
         <div className={styles.notesInput}>
           <label htmlFor="notesTextBox1">Notes: </label>
