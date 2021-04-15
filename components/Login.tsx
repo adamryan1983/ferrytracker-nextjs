@@ -15,9 +15,12 @@ const Login = (props) => {
   }
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [uid, setUid] = useState(false);
+  const [errorReturn, setErrorReturn] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const [password, setPassword] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
 
   const handleForm = (e) => {
     e.preventDefault();
@@ -25,21 +28,37 @@ const Login = (props) => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
-        console.log(res);
-        if (res.user) handleClickIn;
+        console.log(res.user);
+        if (res.user) handleClickIn(res.user.email);
       })
       .catch((e) => {
         console.log(e.message);
-        alert(e.message);
+        handleIncorrectLogin(e.message);
       });
   };
 
-  const handleClickIn = () => {
-    props.setLogged(true),
-      props.setIsVisibleMenu(true),
-      props.setLoginOption(false);
+  const handleGoogle = (e) => {
+    e.preventDefault();
+    firebase
+      .auth()
+      .signInWithPopup(googleProvider)
+      .then((res) => {
+        console.log(res.user.email);
+        if (res.user.emailVerified) handleClickIn(res.user.email);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        handleIncorrectLogin(error.message);
+      });
+  };
 
-    props.setIsVisibleMenu(true), props.setLoginOption(false);
+  const handleClickIn = async (userEmail) => {
+    await setEmail(userEmail);
+    await setErrorMsg("");
+    await setErrorReturn(false);
+    await props.setLogged(true);
+    await props.setIsVisibleMenu(true);
+    props.setLoginOption(false);
   };
   const handleClickOut = () => {
     props.setIsVisibleMenu(false);
@@ -48,13 +67,13 @@ const Login = (props) => {
   };
   const handleClose = () => {
     props.setLoginOption(false);
+    setErrorMsg("");
+    setErrorReturn(false);
   };
 
-  const handleChangeUser = (e) => {
-    setEmail(e.target.value);
-  };
-  const handleChangePw = (e) => {
-    setPassword(e.target.value);
+  const handleIncorrectLogin = (error) => {
+    setErrorMsg(error);
+    setErrorReturn(true);
   };
 
   return (
@@ -78,7 +97,7 @@ const Login = (props) => {
               type="text"
               name="username"
               id="username"
-              onChange={handleChangeUser}
+              onChange={(e) => setEmail(e.target.value)}
               value={email}
               placeholder="email"
             />
@@ -91,7 +110,8 @@ const Login = (props) => {
               value={password}
             />
           </div>
-          <button className="login-provider-button" onClick={handleForm}>
+          {errorReturn && <div style={{ color: "red" }}>{errorMsg}</div>}
+          <button className="login-provider-button" onClick={handleGoogle}>
             <img
               src="https://img.icons8.com/ios-filled/50/000000/google-logo.png"
               alt="google icon"

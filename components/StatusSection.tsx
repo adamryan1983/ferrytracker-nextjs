@@ -100,11 +100,13 @@ const StatusSection = (props) => {
 
   return (
     <div className={styles.statusContainer}>
-      <Mainbar
-        logged={props.logged}
-        setLogged={props.setLogged}
-        setIsVisibleMenu={props.setIsVisibleMenu}
-      />
+      <div className={styles.mainBar}>
+        <Mainbar
+          logged={props.logged}
+          setLogged={props.setLogged}
+          setIsVisibleMenu={props.setIsVisibleMenu}
+        />
+      </div>
       {boatDisplay && (
         <a.div
           className={styles.boatCards}

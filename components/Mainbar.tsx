@@ -10,6 +10,7 @@ const MainBar = (props) => {
   const [visible, setVisible] = useState(false);
   const [loginOption, setLoginOption] = useState(false);
   const [signupOption, setSignupOption] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
   const handleClick = () => {
     setVisible(!visible);
   };
@@ -60,16 +61,26 @@ const MainBar = (props) => {
         </div>
       </div>
       <div className={styles.MainBarNav}>
-        <div onClick={handleClick}>Read Disclaimer</div>
+        <div className={styles.readDisclaimerButton} onClick={handleClick}>
+          Read Disclaimer
+        </div>
 
         <img
           className={styles.logo}
           src="/ferrylogo-horizontal-trans.png"
         ></img>
-
-        <div className={styles.buttonContainer}>
-          <Button onClick={handleClickLogin}>Log In</Button>
-          <Button onClick={handleClickSignup}>Sign Up</Button>
+        <div className={styles.rightContainer}>
+          <div className={styles.buttonContainer}>
+            <Button onClick={handleClickLogin}>Log In</Button>
+            <Button onClick={handleClickSignup}>Sign Up</Button>
+          </div>
+          <div
+            className={
+              isLogged ? styles.welcomeContainer : styles.welcomeContainerHidden
+            }
+          >
+            Hi, user
+          </div>
         </div>
       </div>
     </>

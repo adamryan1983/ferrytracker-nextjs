@@ -61,12 +61,25 @@
 }
 
 .buttonContainer {
+  margin-bottom: 1rem;
   Button {
     margin: 0 0.5rem;
     background-color: $secondaryColor;
     color: $mainText;
+    font-size: calc(0.5rem + 0.3vw + 0.3vh);
   }
 }
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  .welcomeContainer {
+    display: flex;
+  }
+  .welcomeContainerHidden {
+    visibility: hidden;
+  }
+}
+
 .myLink {
   font-weight: 600;
   color: $fourthColor;
@@ -77,6 +90,15 @@
     color: $thirdColor;
     border-bottom: 0.7px solid $fourthColor;
     // text-decoration: underline;
+  }
+}
+
+.readDisclaimerButton {
+  font-size: calc(0.5rem + 0.3vw + 0.3vh);
+  text-decoration: underline $fourthColor 0.2rem;
+  &:hover {
+    color: $fourthColor;
+    cursor: pointer;
   }
 }
 
@@ -97,9 +119,12 @@
     Button {
       display: flex;
       margin: 0.5rem 0;
-      padding: 0.1rem 0.1rem;
+      padding: 0.3rem 0.3rem;
       background-color: $secondaryColor;
       color: $mainText;
     }
   }
+}
+
+@media only screen and (max-width: 500px) {
 }

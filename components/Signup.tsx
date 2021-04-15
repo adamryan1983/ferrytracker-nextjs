@@ -18,6 +18,8 @@ const Login = (props) => {
   const [uid, setUid] = useState(false);
   const [password, setPassword] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
+  const [errorReturn, setErrorReturn] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleForm = (e) => {
     e.preventDefault();
@@ -29,27 +31,48 @@ const Login = (props) => {
       })
       .catch((e) => {
         console.log(e.message);
+        handleIncorrectLogin(e.message);
       });
   };
 
-  const handleClickIn = () => {
-    props.setIsVisibleMenu(true);
+  const handleClickIn = async (userEmail) => {
+    await setEmail(userEmail);
+    await setErrorMsg("");
+    await setErrorReturn(false);
+    await props.setLogged(true);
+    await props.setIsVisibleMenu(true);
     props.setSignupOption(false);
   };
   const handleClose = () => {
     props.setSignupOption(false);
   };
 
-  const handleChangeUser = (e) => {
-    setEmail(e.target.value);
+  const handleIncorrectLogin = (error) => {
+    setErrorMsg(error);
+    setErrorReturn(true);
   };
-  const handleChangePw = (e) => {
-    setPassword(e.target.value);
-  };
+
   const handleClickOut = () => {
     props.setIsVisibleMenu(false);
     props.setSignupOption(false);
     props.setLogged(false);
+  };
+
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+  const handleGoogle = (e) => {
+    e.preventDefault();
+    firebase
+      .auth()
+      .signInWithPopup(googleProvider)
+      .then((res) => {
+        console.log(res.user.email);
+        if (res.user.emailVerified) handleClickIn(res.user.email);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        handleIncorrectLogin(error.message);
+      });
   };
 
   return (
@@ -64,7 +87,9 @@ const Login = (props) => {
       <Button className="closeButton" onClick={handleClose}>
         Close
       </Button>
-
+      {errorReturn && (
+        <div style={{ color: "red" }}>There was an error on signup/sign in</div>
+      )}
       {props.logged ? (
         <>
           <div>You are already logged in</div>
@@ -93,7 +118,7 @@ const Login = (props) => {
               value={password}
             />
           </div>
-          <button className="login-provider-button" onClick={handleForm}>
+          <button className="login-provider-button" onClick={handleGoogle}>
             <img
               src="https://img.icons8.com/ios-filled/50/000000/google-logo.png"
               alt="google icon"

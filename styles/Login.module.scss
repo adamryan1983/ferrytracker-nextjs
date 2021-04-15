@@ -13,9 +13,13 @@
   font-size: calc(0.6rem + 0.3vw + 0.3vh);
   background-color: transparentize($mainColor, 0.03);
   z-index: 50;
+  h1 {
+    color: $fourthColor;
+  }
   form {
     display: flex;
     flex-direction: column;
+
     Button {
       padding: 0.5rem;
       display: flex;
@@ -41,6 +45,10 @@
   .mainContainer {
     width: 100vw;
     height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
     form {
       display: flex;
       flex-direction: column;
