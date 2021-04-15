@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/statusSection.module.scss";
 
 import { Card } from "primereact/card";
-import db from "./Database";
+
+import db from "@lib/Database";
+import Mainbar from "@components/Mainbar";
 
 import { useSpring, animated as a } from "react-spring";
 
@@ -98,7 +100,13 @@ const StatusSection = (props) => {
 
   return (
     <div className={styles.statusContainer}>
-      <img className={styles.logo} src="/ferrylogo-horizontal-trans.png"></img>
+      <div className={styles.mainBar}>
+        <Mainbar
+          logged={props.logged}
+          setLogged={props.setLogged}
+          setIsVisibleMenu={props.setIsVisibleMenu}
+        />
+      </div>
       {boatDisplay && (
         <a.div
           className={styles.boatCards}

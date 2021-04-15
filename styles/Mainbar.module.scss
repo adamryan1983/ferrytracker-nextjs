@@ -1,0 +1,130 @@
+@use '@styles/_variables.scss' as *;
+
+@mixin disclaimerFormat {
+  position: absolute;
+  padding: 0.3rem 0;
+  color: $mainText;
+  background-color: transparentize($mainColor, 0.07);
+  width: 20vw;
+  height: 50vh;
+  font-size: calc(0.4rem + 0.2vw + 0.2vh);
+  z-index: 50;
+  transition: all 0.7s ease;
+  padding: 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  div {
+    margin: 1rem 0;
+  }
+}
+@mixin disclaimerFormatMobile {
+  position: absolute;
+  padding: 0.3rem 0;
+  color: $mainText;
+  background-color: $mainColor;
+  background-color: transparentize($mainColor, 0.07);
+  width: 100vw;
+  height: 50vh;
+  font-size: calc(0.4rem + 0.2vw + 0.2vh);
+  z-index: 50;
+  transition: all 0.7s ease;
+  padding: 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  div {
+    margin: 1rem 0;
+  }
+}
+
+.MainBarNav {
+  display: flex;
+  width: 90vw;
+  height: auto;
+  justify-content: space-between;
+  align-items: center;
+}
+.disclaimer {
+  @include disclaimerFormat;
+  left: -500px;
+}
+.disclaimerOut {
+  @include disclaimerFormat;
+  left: 0;
+}
+.logo {
+  width: 50%;
+  height: auto;
+}
+
+.buttonContainer {
+  margin-bottom: 1rem;
+  Button {
+    margin: 0 0.5rem;
+    background-color: $secondaryColor;
+    color: $mainText;
+    font-size: calc(0.5rem + 0.3vw + 0.3vh);
+  }
+}
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  .welcomeContainer {
+    display: flex;
+  }
+  .welcomeContainerHidden {
+    visibility: hidden;
+  }
+}
+
+.myLink {
+  font-weight: 600;
+  color: $fourthColor;
+  transition: all 0.4s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+    transition: all 0.4s ease-in-out;
+    color: $thirdColor;
+    border-bottom: 0.7px solid $fourthColor;
+    // text-decoration: underline;
+  }
+}
+
+.readDisclaimerButton {
+  font-size: calc(0.5rem + 0.3vw + 0.3vh);
+  text-decoration: underline $fourthColor 0.2rem;
+  &:hover {
+    color: $fourthColor;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .disclaimer {
+    @include disclaimerFormatMobile;
+    left: -800px;
+  }
+  .disclaimerOut {
+    @include disclaimerFormatMobile;
+    left: 0;
+  }
+  .logo {
+    width: 80%;
+  }
+
+  .buttonContainer {
+    Button {
+      display: flex;
+      margin: 0.5rem 0;
+      padding: 0.3rem 0.3rem;
+      background-color: $secondaryColor;
+      color: $mainText;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+}

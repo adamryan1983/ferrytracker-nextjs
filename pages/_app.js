@@ -1,10 +1,15 @@
-import "../styles/globals.css";
+import "@styles/globals.css";
 import PrimeReact from "primereact/api";
+import { LoginWrapper } from "@context/LoginContext";
 
 function MyApp({ Component, pageProps }) {
   // active ripple effect
   PrimeReact.ripple = true;
-  return <Component {...pageProps} />;
+  return (
+    <LoginWrapper>
+      <Component {...pageProps} />
+    </LoginWrapper>
+  );
 }
 
 export default MyApp;

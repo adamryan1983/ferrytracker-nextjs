@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import styles from "@styles/lineupSection.module.scss";
 import { Toast } from "primereact/toast";
 
-import db from "./Database";
+import db from "@lib/Database";
 
 //primereact imports
 import { InputText } from "primereact/inputtext";

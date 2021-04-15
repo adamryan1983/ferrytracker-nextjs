@@ -1,0 +1,12 @@
+@use '@styles/_variables.scss' as *;
+
+.mainContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100vw;
+  height: 18vh;
+  color: $mainText;
+  background-color: $mainColor;
+  margin: 0 1rem;
+}

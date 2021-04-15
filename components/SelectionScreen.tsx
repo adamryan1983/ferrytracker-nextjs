@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import styles from "@styles/selectionScreen.module.scss";
 import InputSection from "@components/InputSection";
 import LineupSection from "@components/LineupSection";
+import NotSigned from "@components/NotSigned";
 
 import { useSpring, animated as a } from "react-spring";
 
@@ -9,7 +10,6 @@ import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 
 const SelectionScreen = (props) => {
-  const [isVisibleMenu, setIsVisibleMenu] = useState(true);
   const [isVisibleBoat, setIsVisibleBoat] = useState(false);
   const [isVisibleLineup, setIsVisibleLineup] = useState(false);
 
@@ -26,18 +26,19 @@ const SelectionScreen = (props) => {
 
   const handleClickLineup = () => {
     toggle(!on);
-    setIsVisibleMenu(false);
+    props.setIsVisibleMenu(false);
     setIsVisibleLineup(true);
   };
   const handleClickBoat = () => {
     toggle(!on);
-    setIsVisibleMenu(false);
+    props.setIsVisibleMenu(false);
     setIsVisibleBoat(true);
   };
   return (
     <>
+      {!props.logged && <NotSigned />}
       <Toast ref={toast} />
-      {isVisibleMenu && (
+      {props.isVisibleMenu && (
         <a.div className={styles.buttonContainer} style={animation}>
           <h2>Please choose an option:</h2>
           <Button className={styles.buttonChoice} onClick={handleClickLineup}>
@@ -48,10 +49,10 @@ const SelectionScreen = (props) => {
           </Button>
         </a.div>
       )}
-
       {isVisibleBoat && (
         <a.div style={animation2}>
           <InputSection
+            logged={props.logged}
             status1={props.status1}
             setStatus1={props.setStatus1}
             reason1={props.reason1}
@@ -65,7 +66,7 @@ const SelectionScreen = (props) => {
             note2={props.note2}
             setNote2={props.setNote2}
             toast={toast}
-            setIsVisibleMenu={setIsVisibleMenu}
+            setIsVisibleMenu={props.setIsVisibleMenu}
             setIsVisibleBoat={setIsVisibleBoat}
             toggle={toggle}
             on={on}
@@ -76,7 +77,7 @@ const SelectionScreen = (props) => {
         <a.div style={animation2}>
           <LineupSection
             setIsVisibleLineup={setIsVisibleLineup}
-            setIsVisibleMenu={setIsVisibleMenu}
+            setIsVisibleMenu={props.setIsVisibleMenu}
             toast={toast}
             toggle={toggle}
             on={on}
