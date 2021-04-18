@@ -28,7 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     "lib/Auth.js",
-    "lib/Database.js"
+    "lib/Database.js",
+    "components/Facebooklogin.jsx"
   ],
   "exclude": ["node_modules"]
 }

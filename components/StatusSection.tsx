@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import styles from "../styles/statusSection.module.scss";
+import React, { useState, useEffect } from 'react';
+import styles from '../styles/statusSection.module.scss';
 
-import { Card } from "primereact/card";
+import { Card } from 'primereact/card';
 
-import db from "@lib/Database";
-import Mainbar from "@components/Mainbar";
+import db from '@lib/Database';
+import Mainbar from '@components/Mainbar';
 
-import { useSpring, animated as a } from "react-spring";
+import { useSpring, animated as a } from 'react-spring';
 
 const StatusSection = (props) => {
   const [statusFlanders, setStatusFlanders] = useState([]);
   const [statusLegionnaire, setStatusLegionnaire] = useState([]);
   const [statusLineup, setStatusLineup] = useState([]);
-  const [isRunning, setisRunning] = useState("running");
-  const [isRunning2, setisRunning2] = useState("running");
+  const [isRunning, setisRunning] = useState('running');
+  const [isRunning2, setisRunning2] = useState('running');
   const [boatDisplay, setBoatDisplay] = useState(true);
   const [lineupDisplay, setLineupDisplay] = useState(false);
 
@@ -26,12 +26,12 @@ const StatusSection = (props) => {
   });
 
   const legionnaireCollection = db
-    .collection("legionnaire")
-    .orderBy("datetime", "desc");
+    .collection('legionnaire')
+    .orderBy('datetime', 'desc');
   const flandersCollection = db
-    .collection("flanders")
-    .orderBy("datetime", "desc");
-  const lineupCollection = db.collection("lineup").orderBy("datetime", "desc");
+    .collection('flanders')
+    .orderBy('datetime', 'desc');
+  const lineupCollection = db.collection('lineup').orderBy('datetime', 'desc');
 
   useEffect(() => {
     legionnaireCollection.onSnapshot((snap) => {
@@ -42,7 +42,7 @@ const StatusSection = (props) => {
       setStatusLegionnaire(info);
       setisRunning(info[0].status);
       return () => {
-        console.log("unmounted");
+        console.log('unmounted');
       };
     });
   }, []);
@@ -55,7 +55,7 @@ const StatusSection = (props) => {
       setStatusFlanders(info);
       setisRunning2(info[0].status);
       return () => {
-        console.log("unmounted");
+        console.log('unmounted');
       };
     });
   }, []);
@@ -67,7 +67,7 @@ const StatusSection = (props) => {
       }));
       setStatusLineup(info);
       return () => {
-        console.log("unmounted");
+        console.log('unmounted');
       };
     });
   }, []);
@@ -81,7 +81,7 @@ const StatusSection = (props) => {
       y = d1.getFullYear();
 
     let minsText = mins.toString();
-    mins < 10 ? (minsText = "0" + mins) : null;
+    mins < 10 ? (minsText = '0' + mins) : null;
 
     let dateString = `${y}/${m}/${d}, ${hrs}:${minsText}`;
     return dateString;
@@ -105,12 +105,14 @@ const StatusSection = (props) => {
           logged={props.logged}
           setLogged={props.setLogged}
           setIsVisibleMenu={props.setIsVisibleMenu}
+          setIsVisibleBoat={props.setIsVisibleBoat}
+          setIsVisibleLineup={props.setIsVisibleLineup}
         />
       </div>
       {boatDisplay && (
         <a.div
           className={styles.boatCards}
-          style={{ opacity: opacity.interpolate((o) => 1 - o), transform }}
+          style={{ opacity: opacity.to((o) => 1 - o), transform }}
         >
           <div className={styles.boatStatusCard}>
             <div className={styles.headerLight}>
@@ -120,12 +122,12 @@ const StatusSection = (props) => {
               </h3>
               <div>
                 <h3>Status:</h3>
-                {isRunning === "Running" ? (
-                  <img src="/running.png" className={styles.runningIcon} />
-                ) : isRunning === "delayed" ? (
-                  <img src="/delayed.png" className={styles.runningIcon} />
+                {isRunning === 'Running' ? (
+                  <img src='/running.png' className={styles.runningIcon} />
+                ) : isRunning === 'delayed' ? (
+                  <img src='/delayed.png' className={styles.runningIcon} />
                 ) : (
-                  <img src="/tiedup.png" className={styles.runningIcon} />
+                  <img src='/tiedup.png' className={styles.runningIcon} />
                 )}
               </div>
             </div>
@@ -166,12 +168,12 @@ const StatusSection = (props) => {
               </h3>
               <div>
                 <h3>Status:</h3>
-                {isRunning2 === "Running" ? (
-                  <img src="/running.png" className={styles.runningIcon} />
-                ) : isRunning2 === "delayed" ? (
-                  <img src="/delayed.png" className={styles.runningIcon} />
+                {isRunning2 === 'Running' ? (
+                  <img src='/running.png' className={styles.runningIcon} />
+                ) : isRunning2 === 'delayed' ? (
+                  <img src='/delayed.png' className={styles.runningIcon} />
                 ) : (
-                  <img src="/tiedup.png" className={styles.runningIcon} />
+                  <img src='/tiedup.png' className={styles.runningIcon} />
                 )}
               </div>
             </div>
@@ -207,7 +209,7 @@ const StatusSection = (props) => {
           className={styles.boatStatusCard}
           style={{
             opacity,
-            transform: transform.interpolate((t) => `${t} rotateX(180deg)`),
+            transform: transform.to((t) => `${t} rotateX(180deg)`),
           }}
         >
           <div className={styles.headerLight}>
