@@ -49,7 +49,7 @@
 }
 .disclaimer {
   @include disclaimerFormat;
-  left: -500px;
+  left: -800px;
 }
 .disclaimerOut {
   @include disclaimerFormat;
@@ -105,7 +105,7 @@
 @media only screen and (max-width: 900px) {
   .disclaimer {
     @include disclaimerFormatMobile;
-    left: -800px;
+    left: -1000px;
   }
   .disclaimerOut {
     @include disclaimerFormatMobile;
@@ -127,4 +127,10 @@
 }
 
 @media only screen and (max-width: 500px) {
+  .MainBarNav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+  }
 }

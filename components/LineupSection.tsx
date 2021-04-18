@@ -1,22 +1,22 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef } from 'react';
 
-import styles from "@styles/lineupSection.module.scss";
-import { Toast } from "primereact/toast";
+import styles from '@styles/lineupSection.module.scss';
+import { Toast } from 'primereact/toast';
 
-import db from "@lib/Database";
+import db from '@lib/Database';
 
 //primereact imports
-import { InputText } from "primereact/inputtext";
-import { RadioButton } from "primereact/radiobutton";
-import { Button } from "primereact/button";
+import { InputText } from 'primereact/inputtext';
+import { RadioButton } from 'primereact/radiobutton';
+import { Button } from 'primereact/button';
 
 function LineupSection(props: any) {
   const [choice, setChoice] = useState();
   const formRef = useRef(null);
-  const [location, setLocation] = useState("");
-  const [carsAmt, setCarsAmt] = useState("");
-  const [side, setSide] = useState("");
-  const [tempStatus, setTempStatus] = useState("");
+  const [location, setLocation] = useState('');
+  const [carsAmt, setCarsAmt] = useState('');
+  const [side, setSide] = useState('');
+  const [tempStatus, setTempStatus] = useState('');
 
   let carAmt, geo, sideInfo;
 
@@ -43,27 +43,30 @@ function LineupSection(props: any) {
 
   const showSuccess = () => {
     props.toast.current.show({
-      severity: "success",
-      summary: "Success",
-      detail: "Status Updated",
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Status Updated',
       life: 3000,
     });
 
-    db.collection("lineup").add({
+    db.collection('lineup').add({
       datetime: new Date(),
       cars: carsAmt,
       side: side,
       geolocation: location,
     });
     setChoice(null);
+    setSide(null);
+    setCarsAmt(null);
+    setLocation(null);
     formRef.current.reset();
   };
 
   const showFail = () => {
     props.toast.current.show({
-      severity: "error",
-      summary: "Fail",
-      detail: "Status Failed to Update",
+      severity: 'error',
+      summary: 'Fail',
+      detail: 'Status Failed to Update',
       life: 3000,
     });
   };
@@ -81,43 +84,43 @@ function LineupSection(props: any) {
         <div className={styles.inputContainer}>
           <div className={styles.locationSelector}>
             <div>Select Location:</div>
-            <label htmlFor="lineupBellIsland" className={styles.labelRadio}>
+            <label htmlFor='lineupBellIsland' className={styles.labelRadio}>
               Bell Island
               <RadioButton
-                name="lineup"
-                id="lineupBellIsland"
-                value="Bell Island"
+                name='lineup'
+                id='lineupBellIsland'
+                value='Bell Island'
                 onChange={handleSideChange}
-                checked={choice === "Bell Island"}
+                checked={choice === 'Bell Island'}
                 className={styles.radioButton}
               />
             </label>
-            <label htmlFor="lineupPort" className={styles.labelRadio}>
+            <label htmlFor='lineupPort' className={styles.labelRadio}>
               Portugal Cove-St.Philips
               <RadioButton
-                name="lineup"
-                id="lineupPort"
-                value="Portugal Cove-St.Philips"
+                name='lineup'
+                id='lineupPort'
+                value='Portugal Cove-St.Philips'
                 onChange={handleSideChange}
-                checked={choice === "Portugal Cove-St.Philips"}
+                checked={choice === 'Portugal Cove-St.Philips'}
                 className={styles.radioButton}
               />
             </label>
           </div>
           <div className={styles.textContainer}>
-            <label htmlFor="cars" className={styles.labelText}>
+            <label htmlFor='cars' className={styles.labelText}>
               Vehicles:
               <InputText
-                id="cars"
+                id='cars'
                 className={styles.inputText}
                 onChange={handleCarsChange}
                 required
               />
             </label>
-            <label htmlFor="geo" className={styles.labelText}>
+            <label htmlFor='geo' className={styles.labelText}>
               Geographic location where traffic ends:
               <InputText
-                id="geo"
+                id='geo'
                 className={styles.inputText}
                 onChange={handleGeoChange}
                 required
