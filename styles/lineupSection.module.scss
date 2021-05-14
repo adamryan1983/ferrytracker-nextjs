@@ -24,7 +24,7 @@
 }
 .radioButton,
 .inputText {
-  margin-left: 1rem;
+  margin-left: 0rem;
 }
 
 .inputContainer {
@@ -98,6 +98,7 @@
     .radioButton,
     .inputText {
       margin: 0;
+      margin-left: 0;
     }
     .inputText {
       padding: 0 0.3;
