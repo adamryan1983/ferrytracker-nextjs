@@ -39,8 +39,6 @@ function FlandersInput(props: any) {
     props.setReason2(reason);
     props.setStatus2(tempStatus);
     props.setNote2(note);
-    note = null;
-    reason = null;
     db.collection('flanders').add({
       datetime: new Date(),
       status: tempStatus,
@@ -48,6 +46,8 @@ function FlandersInput(props: any) {
       note: note,
     });
     formRef.current.reset();
+    note = null;
+    reason = null;
   };
   const showFail = () => {
     props.toast.current.show({
