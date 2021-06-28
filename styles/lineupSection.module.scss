@@ -3,7 +3,7 @@
 .lineupContainer {
   display: flex;
   width: 100vw;
-  height: 18vh;
+  height: 25vh;
   background-color: $mainColor;
   color: $mainText;
 }
@@ -92,7 +92,7 @@
   .inputContainer {
     height: 100%;
     display: flex;
-    width: 70%;
+    width: 80%;
     justify-content: center;
     align-items: center;
     .radioButton,
@@ -101,14 +101,14 @@
       margin-left: 0;
     }
     .inputText {
-      padding: 0 0.3;
+      padding: 0 0.2;
       width: 100%;
     }
   }
   .buttonContainer {
     display: flex;
     height: 100%;
-    width: 30%;
+    width: 20%;
     justify-content: space-between;
     align-items: center;
     margin: 0 0.5rem;
@@ -126,9 +126,10 @@
   }
   .locationSelector {
     width: 40%;
+    font-size: 0.5rem;
   }
   .textContainer {
-    width: 60%;
+    width: 70%;
   }
 }
 @media only screen and (max-width: 600px) {

@@ -51,12 +51,11 @@ function InputSection(props) {
               <RadioButton
                 inputId="boat1"
                 name="boat"
-                value="Legionnaire"
+                value="Beaumont"
                 onChange={handleBoatClick1}
-                // checked={boatSelect === "Legionnaire"}
-                disabled
+                checked={boatSelect === "Legionnaire"}
               />
-              <label htmlFor="boat1">Legionnaire (currently in Fogo)</label>
+              <label htmlFor="boat1">Beaumont (Legionnaire currently in Fogo)</label>
             </div>
             <div className={styles.ferryRadio}>
               <RadioButton

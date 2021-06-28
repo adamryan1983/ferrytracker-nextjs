@@ -116,7 +116,7 @@ const StatusSection = (props) => {
         >
           <div className={styles.boatStatusCard}>
             <div className={styles.headerLight}>
-              <h2>Legionnaire</h2>
+              <h2>Beaumont Hamel</h2>
               <h3 className={styles.lineupButton} onClick={handleBoatClick}>
                 Click to see Lineup info
               </h3>

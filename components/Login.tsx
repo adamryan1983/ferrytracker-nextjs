@@ -87,9 +87,6 @@ const Login = (props) => {
 
   return (
     <div className={styles.mainContainer}>
-      <Button className='closeButton' onClick={handleClose}>
-        Close
-      </Button>
       <img className={styles.logo} src='/ferrylogo-horizontal-trans.png' />
       {props.logged ? (
         <>
@@ -119,6 +116,8 @@ const Login = (props) => {
               value={password}
             />
           </div>
+          <Button onClick={handleForm}>Login Now</Button>
+          <Button onClick={handleClickOut}>Log Out</Button>
           {errorReturn && <div style={{ color: 'red' }}>{errorMsg}</div>}
           <button className='login-provider-button' onClick={handleGoogle}>
             <img
@@ -138,8 +137,9 @@ const Login = (props) => {
             setLoginOption={props.setLoginOption}
             setIsVisibleMenu={props.setIsVisibleMenu}
           />
-          <Button onClick={handleForm}>Login Now</Button>
-          <Button onClick={handleClickOut}>Log Out</Button>
+                <Button className='closeButton' onClick={handleClose}>
+        Close
+      </Button>
         </form>
       )}
     </div>

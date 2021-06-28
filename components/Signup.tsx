@@ -122,6 +122,7 @@ const Login = (props) => {
               value={password}
             />
           </div>
+          <button onClick={handleForm}>Sign Up</button>
           <button className='login-provider-button' onClick={handleGoogle}>
             <img
               src='https://img.icons8.com/ios-filled/50/000000/google-logo.png'
@@ -129,7 +130,7 @@ const Login = (props) => {
             />
             <span> Continue with Google</span>
           </button>
-          <button onClick={handleForm}>Sign Up</button>
+
         </form>
       )}
     </div>

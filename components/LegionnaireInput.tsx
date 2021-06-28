@@ -70,7 +70,7 @@ function LegionnaireInput(props) {
     <form ref={formRef}>
       <div className={styles.legionnaireBlock}>
         <div className={styles.dropInput}>
-          <h4>Legionnaire Boat Status:</h4>
+          <h4>Beaumont Boat Status:</h4>
           <Dropdown
             value={tempStatus}
             options={props.statusSelectItems}
