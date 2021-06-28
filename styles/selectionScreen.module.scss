@@ -5,7 +5,7 @@
   justify-content: space-evenly;
   align-items: center;
   width: 100vw;
-  height: 18vh;
+  height: 25vh;
   color: $mainText;
   background-color: $mainColor;
   margin: 0 1rem;
@@ -23,4 +23,22 @@
   height: 60%;
   font-size: calc(0.3rem + 0.5vw + 0.5vh);
   background-color: $primaryColor;
+}
+
+@media only screen and (max-width:1000px) {
+  .buttonContainer {
+    h2 {
+      padding: 0 calc(1rem + 1vw + 1vh);
+      font-size: calc(0.5rem + 0.5vw + 0.5vh);
+    }
+  }
+  
+  .buttonChoice {
+    height: 40%;
+    background-color: red;
+    button {
+      margin: 0 1rem;
+    }
+  }
+  
 }
