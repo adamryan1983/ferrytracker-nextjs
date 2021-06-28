@@ -206,7 +206,7 @@ const StatusSection = (props) => {
 
       {lineupDisplay && (
         <a.div
-          className={styles.boatStatusCard}
+          className={styles.lineupStatusCard}
           style={{
             opacity,
             transform: transform.to((t) => `${t} rotateX(180deg)`),
@@ -218,7 +218,7 @@ const StatusSection = (props) => {
               Click to see Boat info
             </h3>
           </div>
-          <Card className={styles.statusCard}>
+          <Card className={styles.lineupCard}>
             <div
               className={styles.flexContainerMobile}
               onClick={handleLineupClick}
